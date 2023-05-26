@@ -1,0 +1,82 @@
+<div class="container">
+  <form #userForm="ngForm">
+    <mat-card class="zone zone-picker">
+      <mat-form-field>
+        <input
+          matInput
+          [ngxMatColorPicker]="picker"
+          name="color"
+          [(ngModel)]="user.color"
+          [disabled]="disabled"
+          colorCtrl="ngmodel"
+        />
+        <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+        <ngx-mat-color-picker
+          #picker
+          [touchUi]="touchUi"
+          [color]="selectedColor"
+        ></ngx-mat-color-picker>
+      </mat-form-field>
+    </mat-card>
+  </form>
+
+  <mat-card class="zone zone-value">
+    <div
+      class="row"
+      [style.background-color]="userForm.controls['color'].value?.rgba"
+    >
+      HEX: {{ userForm.controls['color'].value?.hex }}
+    </div>
+    <div class="row">RGBA: {{ userForm.controls['color'].value?.rgba }}</div>
+  </mat-card>
+
+  <mat-card class="zone zone-config">
+    <div class="config-wrapper">
+      <span class="label">disabled (Default: false) </span>
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="disabled">
+        <mat-radio-button
+          class="example-radio-button"
+          *ngFor="let option of options"
+          [value]="option.value"
+        >
+          {{ option.label }}</mat-radio-button
+        >
+      </mat-radio-group>
+    </div>
+
+    <div class="config-wrapper">
+      <span class="label">touchUi (Default: false) </span>
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="touchUi">
+        <mat-radio-button
+          class="example-radio-button"
+          *ngFor="let option of options"
+          [value]="option.value"
+        >
+          {{ option.label }}</mat-radio-button
+        >
+      </mat-radio-group>
+    </div>
+
+    <div class="config-wrapper">
+      <span class="label">color (Default: primary) </span>
+      <mat-form-field>
+        <mat-label>Select color</mat-label>
+        <mat-select [(ngModel)]="selectedColor">
+          <mat-option *ngFor="let item of listColors" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card>
+    <h4>Check details implment on Furetechnews.com</h4>
+    <a
+      href="https://furetechnews.com/5-best-angular-color-picker-and-how-to-implement-it/"
+      target="_blank"
+    >
+      Best libraries to implement color picker in Angular?
+    </a>
+  </mat-card>
+</div>
